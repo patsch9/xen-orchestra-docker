@@ -15,4 +15,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag xen-orchestra:latest
+      run: docker build . --file Dockerfile --tag ghcr.io/patsch9/xen-orchestra:latest
+    - name: Docker Login
+      env: 
+        PAT: b14c1a1895ffc36d645e826e5cc4f483e8db20f7
+        run: echo $PAT | docker login ghcr.io -u patsch9 --password-stdin
+    - name: Docker Push
+      run: docker push ghcr.io/patsch9/xen-orchestra:latest
